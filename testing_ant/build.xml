@@ -1,0 +1,34 @@
+<project name="FCUBSInstaller"  default="Compile">
+<import file="D:/installer/12.4_RETRO_FROM_12.3/FCUBS_12.3.0.0.0_Core_SUPPORT/SOFT/config/Application/AntLibrary.xml" as="Ref"/>
+	<target name="Compile" >
+		<!--<record name="D:\\Continous_Integration\\FCUBS_12.3.0.0.0_SUPPORT\\Console\\INSTALLER\\SOFT\\config\\A/ELCMKernelSQLJ" action="start" append="true" loglevel="info" />-->
+		<delete dir="D:\\Continous_Integration\\FCUBS_12.3.0.0.0_SUPPORT\\Console\\INSTALLER\\SOFT\\config\\A/ELCMKernelSQLJ/Dest/classes"/>
+        <mkdir dir="D:\\Continous_Integration\\FCUBS_12.3.0.0.0_SUPPORT\\Console\\INSTALLER\\SOFT\\config\\A/ELCMKernelSQLJ/Dest/classes"/>
+		<apply executable="D:/app/dandredd/product/11.2.0/client_1/BIN/sqlj" skipemptyfilesets="true" parallel="true" type="file" failonerror="false" taskname="sqlj">
+            <!-- Set the Environment Classpath -->
+           <env key="classpath" 
+            path="D:/installer/12.4_RETRO_FROM_12.3/FCUBS_12.3.0.0.0_Core_SUPPORT/SOFT/Library/plugin-elcm/runtime12.jar;D:/installer/12.4_RETRO_FROM_12.3/FCUBS_12.3.0.0.0_Core_SUPPORT/SOFT/Library/plugin-elcm/translator.jar;D:/installer/12.4_RETRO_FROM_12.3/FCUBS_12.3.0.0.0_Core_SUPPORT/SOFT/Library/plugin-elcm/ojdbc14.jar;D:/app/dandredd/product/11.2.0/client_1/jdk/jre/lib/rt.jar;./ELCMDto.jar;./ELCMCommon.jar"/>
+			
+            <!-- SQLJ Arguments -->
+            <arg value="-d=D:\\Continous_Integration\\FCUBS_12.3.0.0.0_SUPPORT\\Console\\INSTALLER\\SOFT\\config\\A/ELCMKernelSQLJ/Dest/classes"/> 
+            <arg value="-compile=no"/>
+            <!--arg value="-checkfilename=yes"/>
+            <arg value="-status=yes"/-->			
+          <arg value="-warn=all,noverbose,noprecision,noportable"/>
+            <!-- SQLJ Files -->
+            <fileset dir="D:\\Continous_Integration\\FCUBS_12.3.0.0.0_SUPPORT\\Console\\INSTALLER\\SOFT\\config\\A/ELCMKernelSQLJ">
+                <patternset>
+                    <include name="**/*.sqlj"/>
+                </patternset>
+            </fileset>
+            <!-- Mapping to OutputFiles -->
+            <mapper type="glob" from="*.sqlj" to="*_SJProfile0.ser"/>            
+        </apply>
+		<javac executable="C:/Program Files/Java/jdk1.8.0_131/bin/javac.exe" includeantruntime="false" compiler="modern" fork="yes" memoryMaximumSize="256m" srcdir="D:\\Continous_Integration\\FCUBS_12.3.0.0.0_SUPPORT\\Console\\INSTALLER\\SOFT\\config\\A/ELCMKernelSQLJ"  destdir="D:\\Continous_Integration\\FCUBS_12.3.0.0.0_SUPPORT\\Console\\INSTALLER\\SOFT\\config\\A/ELCMKernelSQLJ/Dest/classes"    debug="on" failonerror="true"> 
+			<compilerarg value="-Xlint:-unchecked" />
+                        <compilerarg value="-J-Dfile.encoding=ISO-8859-1" />
+
+		</javac>	
+
+	</target>
+	</project>
